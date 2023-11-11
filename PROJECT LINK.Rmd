@@ -1,0 +1,81 @@
+---
+title: "EMPLOYEE PROJECT"
+output:
+  word_document: default
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+```{r}
+data <- read.csv("C:\\Users\\Prince\\Desktop\\Employee.csv")
+
+```
+
+#What is the distribution of educational qualifications among employees?
+
+# Educational Qualifications distribution
+
+```{r}
+column_names <- colnames(data)
+print(column_names)
+```
+```{r}
+library(ggplot2)
+educational_distribution <- ggplot(data, aes(x = Education)) +
+  geom_bar(fill = "blue") +
+  labs(title = "Distribution of Educational Qualifications",
+       x = "Educational Qualification",
+       y = "Count") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+print(educational_distribution)
+```
+#How does the length of service (Joining Year) vary across different cities?
+```{r}
+boxplot_plot <- ggplot(data, aes(x = City, y = JoiningYear)) +
+  geom_boxplot() +
+  labs(title = "Variation in Joining Year Across Cities",
+       x = "City",
+       y = "Joining Year") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+print(boxplot_plot)
+
+```
+#Is there a correlation between Payment Tier and Experience in Current Domain?
+```{r}
+anova_result <- aov(ExperienceInCurrentDomain ~ PaymentTier, data = data)
+print(summary(anova_result))
+```
+# There is no correlation between Payment Tier and Experience in Current Domain. 
+
+# What is the gender distribution within the workforce?
+```{r}
+library(ggplot2)
+gender_distribution <- ggplot(data, aes(x = Gender)) +
+  geom_bar(fill = "orange") +  # For a bar chart
+  labs(title = "Gender Distribution Within the Workforce",
+       x = "Gender",
+       y = "Count") +
+  theme_minimal()
+
+print(gender_distribution)
+
+```
+```{r}
+library(ggplot2)
+leave_distribution <- ggplot(data, aes(x = LeaveOrNot)) +
+  geom_bar(fill = "green") +
+  labs(title = "Leave-Taking Behavior of Employees",
+       x = "Leave Taken",
+       y = "Count") +
+  theme_minimal()
+
+print(leave_distribution)
+```
+
+
+
